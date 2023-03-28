@@ -74,42 +74,32 @@ $(function () {
   // localStorage.getItem("data").name;
 
   // TODO: Add code to display the current date in the header of the page.
-  function updateClock() {
-    var now = new Date();
-    var dayname = now.getDay(),
-      mo = now.getMonth(),
-      dnum = now.getDate(),
-      yr = now.getFullYear(),
-      hou = now.getHours(),
-      min = now.getMinutes(),
-      sec = now.getSeconds(),
-      pe = "AM";
-
-    if (hou == 0) {
-      hou = 12;
+  // Was not able to figure out how to display Date along with Time. Will resubmit later.
+  function currentTime() {
+    let date = new Date(); 
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+    let session = "AM";
+  
+    if(hh === 0){
+        hh = 12;
     }
-    if (hou > 12) {
-      hou = hou - 12;
-      pe = "PM";
-    }
+    if(hh > 12){
+        hh = hh - 12;
+        session = "PM";
+     }
+  
+     hh = (hh < 10) ? "0" + hh : hh;
+     mm = (mm < 10) ? "0" + mm : mm;
+     ss = (ss < 10) ? "0" + ss : ss;
+      
+     let time = hh + ":" + mm + ":" + ss + " " + session;
+  
+    document.getElementById("clock").innerText = time; 
+    let t = setTimeout(function(){ currentTime() }, 1000);
 
-    Number.prototype.pad = function (digits) {
-      for (var n = this.toString(); n.length < digits; n = 0 + n);
-      return n;
-    }
-
-    var months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var dates = ["Sunday", "Monday", "Tuesday", "Wendsday", "Thursday", "Friday", "Saturday"];
-    var ids = ["dayname", "months", "dates", "year", "hours", "minutes", "seconds", "period"];
-    var values = [dates[dayname], months[mo], dates[dnum], yr.pad(2), hou.pad(2), min.pad(2), sec.pad(2), pe];
-
-    for (var i = 0; i < ids.length; i++)
-      document.getElementById(ids[i]).firstChild.nodeValue = values[i];
   }
-   setInterval(initClock, 1000);
-
-  function initClock() {
-    updateClock();
-    window.setInterval(updateClock, 1);
-  }
+  
+  currentTime();
 });

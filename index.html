@@ -19,18 +19,9 @@
     <p class="lead">A simple calendar app for scheduling your work day</p>
     <p id="currentDay" class="lead"></p>
     <!--clock start-->
-    <div class="datetime">
+    <div id="clock" onload="currentTime()" class="datetime">
       <div class="date">
-        <span id="dayname">Day</span>,
-        <span id="month">Month</span>
-        <span id="daynum">00</span>,
-        <span id="year">Year</span>
-      </div>
-      <div class="date">
-        <span id="hour">00</span>:
-        <span id="mintues">00</span>:
-        <span id="seconds">00</span>
-        <span id="period">AM</span>
+      <span id="date-time"></span>
       </div>
       <!--clock end-->
   </header>
